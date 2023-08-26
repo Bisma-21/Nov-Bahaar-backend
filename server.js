@@ -50,6 +50,12 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+
+app.get('/test',function(req,res){
+  console.log("this is test route")
+  res.send("hello world")
+})
+
 // console.log("xxxxxxxxxxx", publicPath);
 app.use("/uploads", express.static(publicPath));
 // app.use(multer({ storage: diskStorage }).single("image"));
@@ -61,6 +67,6 @@ app.use("/order", orderRoute);
 app.use("/whishlist", whishlistRoute);
 app.use("/review", reviewRoute);
 app.listen(4000, async () => {
-  await mongoose.connect("mongodb://0.0.0.0:27017/ecommerce");
-  console.log("server is running at port 4000");
+  await mongoose.connect(process.env.MongoURI);
+  console.log("server is running at port 3000");
 });
